@@ -1,0 +1,32 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\unrealeditor\\inc\\test_farmplate\\uht\\buildfarmactorcomponent.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\x64\\test_farmplateeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\test_farmplate\\definitions.test_farmplate.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\source\\test_farmplate\\public\\buildfarmactorcomponent.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystatics.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\kismet\\kismetsystemlibrary.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\propertyaccessutil.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\kismetsystemlibrary.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\sound\\dialoguetypes.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\dialoguetypes.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystaticstypes.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystaticstypes.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystatics.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\camera\\cameracomponent.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\cameracomponent.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\boxcomponent.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\boxcomponent.generated.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\source\\test_farmplate\\public\\farmplotactor.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\unrealeditor\\inc\\test_farmplate\\uht\\farmplotactor.generated.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\unrealeditor\\inc\\test_farmplate\\uht\\buildfarmactorcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

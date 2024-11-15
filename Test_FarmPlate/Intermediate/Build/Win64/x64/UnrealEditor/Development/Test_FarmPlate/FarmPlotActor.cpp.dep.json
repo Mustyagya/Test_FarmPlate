@@ -1,0 +1,24 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\source\\test_farmplate\\private\\farmplotactor.cpp",
+        "ProvidedModule": "",
+        "PCH": "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\x64\\test_farmplateeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\test_farmplate\\definitions.test_farmplate.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\source\\test_farmplate\\public\\farmplotactor.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\unrealeditor\\inc\\test_farmplate\\uht\\farmplotactor.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\moviescene\\public\\moviescenesequenceid.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\moviescene\\public\\entitysystem\\moviescenecomponentdebug.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\moviescene\\public\\entitysystem\\moviesceneentitysystemtypes.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\moviescene\\public\\entitysystem\\moviesceneentityids.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\moviescene\\uht\\moviescenesequenceid.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\boxcomponent.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\boxcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

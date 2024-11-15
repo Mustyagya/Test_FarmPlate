@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\Test_FarmPlate.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Test_FarmPlate.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\Test_FarmPlateEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\Test_FarmPlate">
+      <UniqueIdentifier>{F6FDBE63-A87D-3DCC-AA5F-7BD6CED4382F}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Test_FarmPlate\Test_FarmPlate.Build.cs">
+      <Filter>Source\Test_FarmPlate</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\Test_FarmPlate\Test_FarmPlate.cpp">
+      <Filter>Source\Test_FarmPlate</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Test_FarmPlate\Test_FarmPlate.h">
+      <Filter>Source\Test_FarmPlate</Filter>
+    </ClInclude>
+    <Filter Include="Source\Test_FarmPlate\Private">
+      <UniqueIdentifier>{749F85B8-B60B-39A2-8D85-B7996F64521D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Test_FarmPlate\Private\BuildFarmActorComponent.cpp">
+      <Filter>Source\Test_FarmPlate\Private</Filter>
+    </ClCompile>
+    <Filter Include="Source\Test_FarmPlate\Public">
+      <UniqueIdentifier>{DF580D0A-D76E-311D-A1D1-4D9C46FB0032}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Test_FarmPlate\Public\BuildFarmActorComponent.h">
+      <Filter>Source\Test_FarmPlate\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

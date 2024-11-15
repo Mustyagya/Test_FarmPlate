@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"G:\\UE4\\UnrealProjects\\CppTask\\Test_FarmPlate\\Test_FarmPlate\\Source\\Test_FarmPlate\\Test_FarmPlate.Build.cs",
+		"G:\\UE4\\UnrealProjects\\CppTask\\Test_FarmPlate\\Test_FarmPlate\\Source\\Test_FarmPlate.Target.cs",
+		"G:\\UE4\\UnrealProjects\\CppTask\\Test_FarmPlate\\Test_FarmPlate\\Source\\Test_FarmPlateEditor.Target.cs"
+	],
+	"EngineVersion": "5.4.4"
+}

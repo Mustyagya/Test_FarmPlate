@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\unrealeditor\\inc\\test_farmplate\\uht\\test_farmplate.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\x64\\test_farmplateeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\test_farmplate\\definitions.test_farmplate.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

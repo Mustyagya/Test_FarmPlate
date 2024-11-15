@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "Test_FarmPlate",
+			"Path": "..\\Source\\Test_FarmPlate.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "Test_FarmPlateEditor",
+			"Path": "..\\Source\\Test_FarmPlateEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
