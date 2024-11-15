@@ -332,6 +332,25 @@ for(float x= MinBounds.X; x<=MaxBounds.X; x+=StepX)
 //Попробуем разделить функцию на то чтобы тут создавался только главный бокс и внутри него были тольок разделение на грядки
 void UBuildFarmActorComponent::UpdateFarmPlotSize()
 {
+    if (!LastHitResult.bBlockingHit|| !bIsPlacing|| !CurrentCollisionBox) return;
+    FVector NewLocation = LastHitResult.ImpactPoint;
+    FVector Delta=NewLocation - InitialLocation;
+
+    //Логика для расчета главного бокса по осям
+    if (FMath::Abs(Delta.X)>FMath::Abs(Delta.Y))
+    {
+        //двигаемся по оис Y, фексируем Y
+        CurrentSize.Y=150.0f;
+        if(FMath::Abs(Delta.X)>150.0)
+        {
+            CurrentSize.Y+=FMath::Abs(Delta.X)-150.0f;
+        }
+        CurrentSize.X=FMath::Abs(Delta.X);
+    }
+    else
+    {
+        // Двигаться по оси Y, фиксируем X
+    }
 
     
 }
