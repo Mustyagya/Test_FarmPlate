@@ -178,7 +178,9 @@
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\fastreferencecollector.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\garbagecollectionschema.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\versetypesfwd.h",
-            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\dynamicallytypedvalue.h"
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\dynamicallytypedvalue.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\staticmeshdescription\\public\\staticmeshattributes.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\meshdescription\\public\\meshattributes.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
