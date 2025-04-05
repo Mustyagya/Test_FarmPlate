@@ -6,6 +6,7 @@
 #include "MovieSceneSequenceID.h"
 #include "Components//BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include"Kismet\GameplayStatics.h"
 
 // Sets default values
 AFarmPlotActor::AFarmPlotActor()
@@ -15,10 +16,16 @@ AFarmPlotActor::AFarmPlotActor()
 
 	CollisionBox=CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
 	RootComponent=CollisionBox;
+	CollisionBox->bHiddenInGame = false; // Показывать объект даже в игре
+	CollisionBox->SetVisibility(true);  // Включить видимость
 
+	
 	PlotMesh=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlotMesh"));
 	PlotMesh->SetupAttachment(RootComponent);//подключаем к корневому(главноему обьенкту)
 	PlotMesh->SetVisibility(true);
+
+	AutoReceiveInput = EAutoReceiveInput::Player0;
+	
 }
 
 
@@ -46,8 +53,13 @@ void AFarmPlotActor::InitializePlot(FVector PlotLocation, FVector PlotSIze ,FVec
 	
 	MeshOffset=InMeshOffset;
 	PlotMesh->SetRelativeLocation( MeshOffset);
+	// Проверяем, чтобы PlotMesh оставался внутри главного CollisionBox
+	
 	UpdateMeshLocation();
 }
+
+
+
 void AFarmPlotActor::UpdateMeshLocation()
 {
 	if (PlotMesh)
@@ -58,5 +70,3 @@ void AFarmPlotActor::UpdateMeshLocation()
 		UE_LOG(LogTemp, Log, TEXT("PlotMesh is now visible and has collision enabled."));
 	}
 }
-
-

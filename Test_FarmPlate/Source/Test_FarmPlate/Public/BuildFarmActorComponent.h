@@ -41,10 +41,29 @@ public:
 	UPROPERTY(EditAnywhere, Category = "FarmPlot")
 	TSubclassOf<class AFarmPlotActor> MyFarmPlotActorBPClass;
 
+	FVector MaxBounds;
+	FVector MinBounds;
+	FVector InternalBoundsMax;
+	FVector InternalBoundsMin;
+	FVector Center;//пока просто обьявил тут
+	float StepX;// new
+	float StepY;//new
+	float MainBoxWidth;
+	float MainBoxHeight;
+	bool bIsBoxRedy;
+	
+	
+
 private:
 	bool bIsPlacing;  // Флаг, определяющий процесс установки бокса
 	FVector InitialLocation;  // Стартовая позиция бокса
 	FVector CurrentSize;  // Текущий размер бокса
 	FHitResult LastHitResult;  // Последний результат трассировки
 	UBoxComponent* CurrentCollisionBox;  // Ссылка на текущий коллизионный бокс
+	TSet<FVector> SpawnedLocation;//хранит уникальные координаты спувна
+	FVector PreviousSize;//хранит предедущие координаты бокса
+
+	FVector LastKnowSize; 
+
+	
 };

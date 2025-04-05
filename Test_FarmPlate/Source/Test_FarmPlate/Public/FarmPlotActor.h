@@ -16,6 +16,7 @@ public:
 	AFarmPlotActor();
 	UFUNCTION(BlueprintCallable, Category = "Plot")
 	void InitializePlot(FVector PlotLocation, FVector PlotSIze,  FVector InMeshOffset);
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,6 +33,6 @@ public:
 	class UStaticMeshComponent* PlotMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category="Plot")
 	FVector MeshOffset;
-	private:
+private:
 	void UpdateMeshLocation();
 };
