@@ -138,18 +138,29 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
      MaxBounds = InternalBoundsMax;
      //-------------------------------------------
      //новая строка Используем расширения границ
-     float PaddingX_Min = StepX /  -1.35f; // Уменьшаем левую границу (например, -25.0f)
-     float PaddingX_Max =  StepX / 0.99f; // Увеличиваем правую границу (например, +21.0f)
-     float PaddingY_Min = StepY / -1.19f; // Уменьшаем нижнюю границу (например, -40.0f) верх
-     float PaddingY_Max =  StepY / 0.99f; // Увеличиваем верхнюю границу (например, +30.0f) 
+      //float PaddingX_Min = StepX /  -1.35f; // Уменьшаем левую границу (например, -25.0f)
+      //float PaddingX_Max =  StepX / 0.99f; // Увеличиваем правую границу (например, +21.0f)
+      //float PaddingY_Min = StepY / -1.19f; // Уменьшаем нижнюю границу (например, -40.0f) верх
+      //float PaddingY_Max =  StepY / 0.99f; // Увеличиваем верхнюю границу (например, +30.0f)
+
+    //--
+    float PaddingX_Min = 10.0f;  // Например, 10 единиц отступа слева
+    float PaddingX_Max = 10.0f;  // И справа
+    float PaddingY_Min = 10.0f;  // Сверху
+    float PaddingY_Max = 10.0f;  // Снизу
+    //--
     /*FVector AdjustedMinBounds=InternalBoundsMin+FVector(21.0f,30.0f,0.0f);*/
      /*FVector AdjustedMaxBounds=InternalBoundsMax-FVector(-25.0f,-40.0f,0.0f);*/
      FVector AdjustedMinBounds = InternalBoundsMin - FVector(PaddingX_Min, PaddingY_Min, 0.0f); 
      FVector AdjustedMaxBounds = InternalBoundsMax + FVector(PaddingX_Max, PaddingY_Max, 0.0f);
      //  Дополнительная коррекция для нижнего правого угла
     UE_LOG(LogTemp, Warning, TEXT("Before Adjust: AdjustedMaxBounds.X=%f, AdjustedMinBounds.Y=%f"), AdjustedMaxBounds.X, AdjustedMinBounds.Y);
-     AdjustedMaxBounds.X += StepX / 2222252.0f;  // Чуть увеличиваем вправо
-     AdjustedMinBounds.Y -= StepY /  1152.0f;  // Чуть сдвигаем вниз
+     //AdjustedMaxBounds.X += StepX / 2222252.0f;  // Чуть увеличиваем вправо
+     //AdjustedMinBounds.Y -= StepY /  1152.0f;  // Чуть сдвигаем вниз
+    //--
+    AdjustedMaxBounds.X += BOUNDS_PADDING_X;  // Чуть увеличили правую границу
+    AdjustedMinBounds.Y -= BOUNDS_PADDING_Y;  // Чуть сдвинули нижнюю границу
+    //--
     UE_LOG(LogTemp, Warning, TEXT("After Adjust: AdjustedMaxBounds.X=%f, AdjustedMinBounds.Y=%f"), AdjustedMaxBounds.X, AdjustedMinBounds.Y);
     //--------------------------------------------
     MainBoxWidth = AdjustedMaxBounds.X - AdjustedMinBounds.X;

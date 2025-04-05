@@ -63,7 +63,10 @@ private:
 	TSet<FVector> SpawnedLocation;//хранит уникальные координаты спувна
 	FVector PreviousSize;//хранит предедущие координаты бокса
 
-	FVector LastKnowSize; 
-
-	
+	FVector LastKnowSize;
+	//--
+	// Допустимые погрешности для границ
+	const float BOUNDS_PADDING_X = 0.5f;  // Маленький запас по X
+	const float BOUNDS_PADDING_Y = 0.5f;  // Маленький запас по Y
+	//--
 };
