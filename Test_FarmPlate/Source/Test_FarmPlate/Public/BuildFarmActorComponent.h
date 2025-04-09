@@ -66,7 +66,7 @@ private:
 	FVector LastKnowSize;
 	//--
 	// Допустимые погрешности для границ
-	const float BOUNDS_PADDING_X = 0.5f;  // Маленький запас по X
-	const float BOUNDS_PADDING_Y = 0.5f;  // Маленький запас по Y
+	//const float BOUNDS_PADDING_X = 0.5f;  // Маленький запас по X
+	//const float BOUNDS_PADDING_Y = 0.5f;  // Маленький запас по Y
 	//--
 };

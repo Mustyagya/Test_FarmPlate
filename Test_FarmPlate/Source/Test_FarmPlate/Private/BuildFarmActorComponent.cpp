@@ -22,6 +22,12 @@ UBuildFarmActorComponent::UBuildFarmActorComponent()
      bIsBoxRedy=false;
    // CurrentCollisionBox->bHiddenInGame = false; // Показывать объект даже в игре
    //  CurrentCollisionBox->SetVisibility(true);  // Включить видимость
+
+    //--Добавим инициализацию шагов по умолчанию
+    StepX = 40.0f;  // Стандартный шаг по X
+    StepY = 40.0f;  // Стандартный шаг по Y
+    // Это предотвратит проблемы, когда шаги не определены при первом вызове
+    //--
 }
 
 // Инициализация компонента
@@ -95,8 +101,8 @@ void UBuildFarmActorComponent::OnStartPlacingFarmPlot()
     if (LastHitResult.bBlockingHit)
     {
         InitialLocation = LastHitResult.ImpactPoint;
+        //-- Устанавливаем минимальные размеры
         CurrentSize = FVector(250.0f, 250.0f, 150.0f);  // Начальные размеры бокса
-
         // Создаем коллизионный бокс
         FTransform BoxTransform;
         BoxTransform.SetLocation(InitialLocation);
@@ -110,17 +116,27 @@ void UBuildFarmActorComponent::OnStartPlacingFarmPlot()
             CurrentCollisionBox->SetVisibility(true);
             CurrentCollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
+            //-- Добавляем цвет для лучшей видимости
+            CurrentCollisionBox->ShapeColor = FColor::Green.WithAlpha(100);
            //CurrentCollisionBox->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::KeepWorldTransform);
         }
 
         bIsPlacing = true;  // Начинаем процесс установки участка
         bIsBoxRedy = false;
+        
+        /*//-- Инициализируем границы
+        InternalBoundsMin = InitialLocation - (CurrentSize / 2.0f);
+        InternalBoundsMax = InitialLocation + (CurrentSize / 2.0f);
+        //--*/
+
+        //-- Рисуем начальные границы
+        DrawDebugBox(GetWorld(), InitialLocation, CurrentSize / 2.0f, FColor::Green, true, -1, 0, 2.0f);
     }
 }
 //-----------------------------------------------------------------
 
-//---
-void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
+//---OnFinishPlacingFarmPlot АКТУАЛЬНЫЙ КОД НЕ УДАЛЯТЬ!!!!! ЭТО ВАЖНО
+/*void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
 {
     if (!bIsPlacing || !CurrentCollisionBox) return;
     bIsPlacing = false;
@@ -149,8 +165,8 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
     float PaddingY_Min = 10.0f;  // Сверху
     float PaddingY_Max = 10.0f;  // Снизу
     //--
-    /*FVector AdjustedMinBounds=InternalBoundsMin+FVector(21.0f,30.0f,0.0f);*/
-     /*FVector AdjustedMaxBounds=InternalBoundsMax-FVector(-25.0f,-40.0f,0.0f);*/
+    /*FVector AdjustedMinBounds=InternalBoundsMin+FVector(21.0f,30.0f,0.0f);#1#
+     /*FVector AdjustedMaxBounds=InternalBoundsMax-FVector(-25.0f,-40.0f,0.0f);#1#
      FVector AdjustedMinBounds = InternalBoundsMin - FVector(PaddingX_Min, PaddingY_Min, 0.0f); 
      FVector AdjustedMaxBounds = InternalBoundsMax + FVector(PaddingX_Max, PaddingY_Max, 0.0f);
      //  Дополнительная коррекция для нижнего правого угла
@@ -201,9 +217,9 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
             MinDebugBounds = FVector::Min(MinDebugBounds, SmallBoxCenter);
             MaxDebugBounds = FVector::Max(MaxDebugBounds, SmallBoxCenter); //старый вариант
              /*UE_LOG(LogTemp, Log, TEXT("SnappedPositionX: X=%f"), SnappedPositionX.X);
-             UE_LOG(LogTemp, Log, TEXT("SnappedPositionY: Y=%f"), SnappedPositionY.Y);*/
+             UE_LOG(LogTemp, Log, TEXT("SnappedPositionY: Y=%f"), SnappedPositionY.Y);#1#
             SpawnedLocation.Add(SmallBoxCenter);//Старый вариант
-            FVector SmallBoxExtent(StepX / 2.0f, StepY / 2.0f, /*HalfSize.Z*/(MaxBounds.Z - MinBounds.Z) / 2.0f);
+            FVector SmallBoxExtent(StepX / 2.0f, StepY / 2.0f, /*HalfSize.Z#1#(MaxBounds.Z - MinBounds.Z) / 2.0f);
                 if (SpawnedLocation.Num() > MaxSteps)
                 {
                     break;
@@ -216,18 +232,18 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
             {
                 FActorSpawnParameters SpawnParams;
                 AFarmPlotActor* NewPlot = GetWorld()->SpawnActor<AFarmPlotActor>
-                (MyFarmPlotActorBPClass, /*SnappedCenter*/SmallBoxCenter, FRotator::ZeroRotator, SpawnParams);
+                (MyFarmPlotActorBPClass, /*SnappedCenter#1#SmallBoxCenter, FRotator::ZeroRotator, SpawnParams);
                 if (NewPlot)
                 {
-                    NewPlot->InitializePlot( /*SnappedCenter*/ SmallBoxCenter, SmallBoxExtent, FVector(0.0f, 0.0f, -30.0f));
+                    NewPlot->InitializePlot( /*SnappedCenter#1# SmallBoxCenter, SmallBoxExtent, FVector(0.0f, 0.0f, -30.0f));
                 }
             }
         }
     }
     // Применение Padding к MinDebugBounds и MaxDebugBounds
     //float Padding = -100.0f; // Отступ для MainBox
-    MinDebugBounds -= FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding*/);
-    MaxDebugBounds += FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding*/);
+    MinDebugBounds -= FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding#1#);
+    MaxDebugBounds += FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding#1#);
  // Добавляем отступы в финальных границах главного бокса
     //MinBounds += FVector(80.0f, 80.0f, 0.0f);
     //MaxBounds -= FVector(80.0f, 80.0f, 0.0f);
@@ -260,7 +276,70 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
         });
     }
     //--------------------------------------------
+}*/
+
+//--новый вариант кода!
+void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
+{
+    if (!bIsPlacing || !CurrentCollisionBox) return;
+    bIsPlacing = false;
+    
+    //-- Получаем текущие границы
+    Center = CurrentCollisionBox->GetComponentLocation();
+    FVector HalfSize = CurrentCollisionBox->GetScaledBoxExtent();
+    InternalBoundsMin = Center - HalfSize;
+    InternalBoundsMax = Center + HalfSize;
+    
+    //-- Добавляем отступы (10% от размера)
+    float PaddingX = HalfSize.X * 0.1f;
+    float PaddingY = HalfSize.Y * 0.1f;
+    FVector AdjustedMinBounds = InternalBoundsMin + FVector(PaddingX, PaddingY, 0.0f);
+    FVector AdjustedMaxBounds = InternalBoundsMax - FVector(PaddingX, PaddingY, 0.0f);
+    
+    //-- Рассчитываем количество шагов
+    int32 StepsX = FMath::FloorToInt((AdjustedMaxBounds.X - AdjustedMinBounds.X) / StepX);
+    int32 StepsY = FMath::FloorToInt((AdjustedMaxBounds.Y - AdjustedMinBounds.Y) / StepY);
+    
+    //-- Корректируем шаги для равномерного распределения
+    if (StepsX > 0 && StepsY > 0) {
+        float NewStepX = (AdjustedMaxBounds.X - AdjustedMinBounds.X) / StepsX;
+        float NewStepY = (AdjustedMaxBounds.Y - AdjustedMinBounds.Y) / StepsY;
+        StepX = FMath::Clamp(NewStepX, 40.0f, 70.0f);
+        StepY = FMath::Clamp(NewStepY, 40.0f, 70.0f);
+    }
+    
+    //-- Спавн мелких боксов
+    for (float X = AdjustedMinBounds.X + StepX/2.0f; X <= AdjustedMaxBounds.X; X += StepX) {
+        for (float Y = AdjustedMinBounds.Y + StepY/2.0f; Y <= AdjustedMaxBounds.Y; Y += StepY) {
+            FVector SmallBoxCenter(X, Y, Center.Z);
+            
+            // Проверка границ (двойная проверка для надежности)
+            if (SmallBoxCenter.X < InternalBoundsMin.X || SmallBoxCenter.X > InternalBoundsMax.X ||
+                SmallBoxCenter.Y < InternalBoundsMin.Y || SmallBoxCenter.Y > InternalBoundsMax.Y) {
+                continue;
+            }
+            
+            if (MyFarmPlotActorBPClass) {
+                FActorSpawnParameters SpawnParams;
+                AFarmPlotActor* NewPlot = GetWorld()->SpawnActor<AFarmPlotActor>(
+                    MyFarmPlotActorBPClass, SmallBoxCenter, FRotator::ZeroRotator, SpawnParams);
+                
+                if (NewPlot) {
+                    FVector SmallBoxExtent(StepX / 2.0f, StepY / 2.0f, HalfSize.Z);
+                    NewPlot->InitializePlot(SmallBoxCenter, SmallBoxExtent, FVector(0.0f, 0.0f, -30.0f));
+                }
+            }
+        }
+    }
+    
+    //-- Финализация главного бокса
+    CurrentCollisionBox->SetHiddenInGame(true);
+    CurrentCollisionBox->SetVisibility(false);
+    bIsBoxRedy = true;
 }
+
+//--
+
 /*void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
 {
     if (!bIsPlacing || !CurrentCollisionBox) return;
@@ -329,6 +408,57 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
 //---------------------------------------------------- конец части кода
 //-------------------------------------------------------------------------------------------------
 
+//--Новый вариант кода UpdateFarmPlotSize() от дипа!
+void UBuildFarmActorComponent::UpdateFarmPlotSize()
+{
+    if (!LastHitResult.bBlockingHit || !bIsPlacing || !CurrentCollisionBox) return;
+
+    FVector NewLocation = LastHitResult.ImpactPoint;
+    FVector Delta = NewLocation - InitialLocation;
+
+    //-- Старая версия логики фиксации осей
+    //if (FMath::Abs(Delta.X) > FMath::Abs(Delta.Y)) { ... }
+    //else { ... }
+
+    //-- Новая версия: более стабильное вычисление размеров
+    // Гарантируем минимальный размер 250x250
+    CurrentSize.X = FMath::Max(FMath::Abs(Delta.X), 250.0f);
+    CurrentSize.Y = FMath::Max(FMath::Abs(Delta.Y), 250.0f);
+    CurrentSize.Z = 150.0f; // Фиксированная высота
+    
+    // Вычисляем центр
+    Center = (InitialLocation + NewLocation) / 2.0f;
+    Center.Z += 65.0f; // Небольшой подъем над поверхностью
+    
+    // Обновляем границы
+    FVector HalfSize = CurrentSize / 2.0f;
+    InternalBoundsMin = Center - HalfSize;
+    InternalBoundsMax = Center + HalfSize;
+    
+    //-- Обновляем коллизионный бокс
+    CurrentCollisionBox->SetBoxExtent(HalfSize);
+    CurrentCollisionBox->SetWorldLocation(Center);
+    
+    //-- Адаптивные шаги (сохраняем пропорции)
+    float SizeRatio = CurrentSize.X / CurrentSize.Y;
+    if (SizeRatio > 1.5f) { // Широкая область
+        StepX = FMath::Clamp(CurrentSize.X / 6.0f, 40.0f, 70.0f);
+        StepY = StepX * 0.8f;
+    }
+    else if (SizeRatio < 0.66f) { // Узкая область
+        StepY = FMath::Clamp(CurrentSize.Y / 6.0f, 40.0f, 70.0f);
+        StepX = StepY * 0.8f;
+    }
+    else { // Квадратная область
+        StepX = StepY = FMath::Clamp((CurrentSize.X + CurrentSize.Y) / 12.0f, 40.0f, 70.0f);
+    }
+    
+    // Для дебага
+    DrawDebugBox(GetWorld(), Center, HalfSize, FColor::Blue, false, 0.0f);
+}
+//--конец кода 
+
+/*АКТУАЛЬЫНЙ КОД НЕ УДАЛЯТЬ !!!!!!! ВНИМАНИЕ НЕ УДАЛЯТЬ КОД11111 
 void UBuildFarmActorComponent::UpdateFarmPlotSize()
 {
 UE_LOG(LogTemp, Warning, TEXT("Before UpdateFarmPlotSize: InternalBoundsMin: %s, InternalBoundsMax: %s"),
@@ -345,7 +475,7 @@ UE_LOG(LogTemp, Warning, TEXT("Before UpdateFarmPlotSize: InternalBoundsMin: %s,
         *InternalBoundsMin.ToString(), *InternalBoundsMax.ToString());
     /*FVector ExpandedSize = CurrentSize + FVector(80.0f, 80.0f, 0.0f);
     InternalBoundsMin = Center - (ExpandedSize / 2.0f);
-    InternalBoundsMax = Center + (ExpandedSize / 2.0f);*/
+    InternalBoundsMax = Center + (ExpandedSize / 2.0f);#1#
     //----
         // Логика фиксации и увеличения осей
         if (FMath::Abs(Delta.X) > FMath::Abs(Delta.Y))
@@ -420,7 +550,7 @@ UE_LOG(LogTemp, Warning, TEXT("Before UpdateFarmPlotSize: InternalBoundsMin: %s,
                                 UE_LOG(LogTemp, Log, TEXT("Delta: X=%f, Y=%f"), Delta.X, Delta.Y);
                                 UE_LOG(LogTemp, Log, TEXT("StepX=%f, StepY=%f"), StepX, StepY);
                             return;
-                }*/
+                }#1#
     if (CurrentSize.X < StepX || CurrentSize.Y < StepY)
     {
         //
@@ -438,11 +568,11 @@ UE_LOG(LogTemp, Warning, TEXT("Before UpdateFarmPlotSize: InternalBoundsMin: %s,
         /*CurrentCollisionBox->SetBoxExtent(CurrentSize / 2.0f);
          Center = (InitialLocation + NewLocation) / 2.0f;
         Center.Z += 35.0f;
-        CurrentCollisionBox->SetWorldLocation(Center);*/
+        CurrentCollisionBox->SetWorldLocation(Center);#1#
     // Вычисляем внутренние координаты
     /*FVector HalfSize = CurrentSize / 2.0f;
     InternalBoundsMin = Center - HalfSize;
-    InternalBoundsMax = Center + HalfSize;*/
+    InternalBoundsMax = Center + HalfSize;#1#
         // Отрисовка главного бокса
         DrawDebugBox(GetWorld(), Center, CurrentSize / 2.0f, FColor::Blue, false, 0.0f);
         // Проверка на минимальный размер бокса
@@ -455,7 +585,7 @@ UE_LOG(LogTemp, Warning, TEXT("Before UpdateFarmPlotSize: InternalBoundsMin: %s,
     LastKnowSize=CurrentSize;
     /*FVector SnappedPosition;
     FVector MinDebugBounds(FLT_MAX, FLT_MAX, FLT_MAX);
-    FVector MaxDebugBounds(-FLT_MAX, -FLT_MAX, -FLT_MAX);*/
+    FVector MaxDebugBounds(-FLT_MAX, -FLT_MAX, -FLT_MAX);#1#
     //for (float X = InitialLocation.X; X < InitialLocation.X + CurrentSize.X; X += StepX)
     //{
         //for (float Y = InitialLocation.Y; Y < InitialLocation.Y + CurrentSize.Y; Y += StepY)
@@ -478,4 +608,4 @@ UE_LOG(LogTemp, Warning, TEXT("Before UpdateFarmPlotSize: InternalBoundsMin: %s,
     LastKnowSize = CurrentSize;
     CurrentCollisionBox->SetBoxExtent(CurrentSize / 2.0f);
     CurrentCollisionBox->SetWorldLocation(Center);
-}
+}*/
