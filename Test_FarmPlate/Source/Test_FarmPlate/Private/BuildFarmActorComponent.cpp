@@ -124,7 +124,7 @@ void UBuildFarmActorComponent::OnStartPlacingFarmPlot()
 //-----------------------------------------------------------------
 
 //---OnFinishPlacingFarmPlot АКТУАЛЬНЫЙ КОД НЕ УДАЛЯТЬ!!!!! ЭТО ВАЖНО
-void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
+/*void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
 {
     if (!bIsPlacing || !CurrentCollisionBox) return;
     bIsPlacing = false;
@@ -200,9 +200,9 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
             MinDebugBounds = FVector::Min(MinDebugBounds, SmallBoxCenter);
             MaxDebugBounds = FVector::Max(MaxDebugBounds, SmallBoxCenter); //старый вариант
              /*UE_LOG(LogTemp, Log, TEXT("SnappedPositionX: X=%f"), SnappedPositionX.X);
-             UE_LOG(LogTemp, Log, TEXT("SnappedPositionY: Y=%f"), SnappedPositionY.Y);*/
+             UE_LOG(LogTemp, Log, TEXT("SnappedPositionY: Y=%f"), SnappedPositionY.Y);#1#
             SpawnedLocation.Add(SmallBoxCenter);//Старый вариант
-            FVector SmallBoxExtent(StepX / 2.0f, StepY / 2.0f, /*HalfSize.Z*/(MaxBounds.Z - MinBounds.Z) / 2.0f);
+            FVector SmallBoxExtent(StepX / 2.0f, StepY / 2.0f, /*HalfSize.Z#1#(MaxBounds.Z - MinBounds.Z) / 2.0f);
                 if (SpawnedLocation.Num() > MaxSteps)
                 {
                     break;
@@ -215,18 +215,18 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
             {
                 FActorSpawnParameters SpawnParams;
                 AFarmPlotActor* NewPlot = GetWorld()->SpawnActor<AFarmPlotActor>
-                (MyFarmPlotActorBPClass, /*SnappedCenter*/SmallBoxCenter, FRotator::ZeroRotator, SpawnParams);
+                (MyFarmPlotActorBPClass, /*SnappedCenter#1#SmallBoxCenter, FRotator::ZeroRotator, SpawnParams);
                 if (NewPlot)
                 {
-                    NewPlot->InitializePlot( /*SnappedCenter*/ SmallBoxCenter, SmallBoxExtent, FVector(0.0f, 0.0f, -30.0f));
+                    NewPlot->InitializePlot( /*SnappedCenter#1# SmallBoxCenter, SmallBoxExtent, FVector(0.0f, 0.0f, -30.0f));
                 }
             }
         }
     }
     // Применение Padding к MinDebugBounds и MaxDebugBounds
     //float Padding = -100.0f; // Отступ для MainBox
-    MinDebugBounds -= FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding*/);
-    MaxDebugBounds += FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding*/);
+    MinDebugBounds -= FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding#1#);
+    MaxDebugBounds += FVector(100.0f,100.0f,0.0f/*Padding, Padding, Padding#1#);
  // Добавляем отступы в финальных границах главного бокса
     //MinBounds += FVector(80.0f, 80.0f, 0.0f);
     //MaxBounds -= FVector(80.0f, 80.0f, 0.0f);
@@ -259,9 +259,86 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
         });
     }
     //--------------------------------------------
+}*/
+//-- НОВЫЙ вариант Тестим
+void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
+{
+    if (!bIsPlacing || !CurrentCollisionBox) return;
+    bIsPlacing = false;
+
+    Center = CurrentCollisionBox->GetComponentLocation();
+    FVector HalfSize = CurrentCollisionBox->GetScaledBoxExtent();
+
+    MinBounds = InternalBoundsMin;
+    MaxBounds = InternalBoundsMax;
+
+    MainBoxWidth = MaxBounds.X - MinBounds.X;
+    MainBoxHeight = MaxBounds.Y - MinBounds.Y;
+
+    StepX = FMath::Clamp(MainBoxWidth / 1.0f, 40.0f, 70.0f);
+    StepY = FMath::Clamp(MainBoxHeight / 1.0f, 40.0f, 70.0f);
+
+    float PaddingScale = 0.75f;
+    FVector Padding(StepX * PaddingScale, StepY * PaddingScale, 0.0f);
+    FVector AdjustedMinBounds = InternalBoundsMin - Padding;
+    FVector AdjustedMaxBounds = InternalBoundsMax + Padding;
+
+    int MaxSteps = 10000;
+    int StepCount = 1;
+    FVector MinDebugBounds(FLT_MAX, FLT_MAX, FLT_MAX);
+    FVector MaxDebugBounds(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+
+    for (float X = AdjustedMinBounds.X; X < AdjustedMaxBounds.X && StepCount < MaxSteps; X += StepX)
+    {
+        for (float Y = AdjustedMinBounds.Y; Y < AdjustedMaxBounds.Y && StepCount < MaxSteps; Y += StepY)
+        {
+            FVector SmallBoxCenter(X, Y, Center.Z);
+            FVector SmallBoxExtent(StepX / 2.0f, StepY / 2.0f, (MaxBounds.Z - MinBounds.Z) / 2.0f);
+            FBox MainBox(InternalBoundsMin, InternalBoundsMax);
+            FBox BoxBounds = FBox(SmallBoxCenter - SmallBoxExtent, SmallBoxCenter + SmallBoxExtent);
+
+            if (!MainBox.IsInside(BoxBounds.Min) || !MainBox.IsInside(BoxBounds.Max))
+                continue;
+
+            SpawnedLocation.Add(SmallBoxCenter);
+
+            MinDebugBounds = FVector::Min(MinDebugBounds, SmallBoxCenter);
+            MaxDebugBounds = FVector::Max(MaxDebugBounds, SmallBoxCenter);
+
+            if (MyFarmPlotActorBPClass)
+            {
+                FActorSpawnParameters SpawnParams;
+                AFarmPlotActor* NewPlot = GetWorld()->SpawnActor<AFarmPlotActor>(
+                    MyFarmPlotActorBPClass,
+                    SmallBoxCenter,
+                    FRotator::ZeroRotator,
+                    SpawnParams);
+
+                if (NewPlot)
+                {
+                    NewPlot->InitializePlot(SmallBoxCenter, SmallBoxExtent, FVector(0.0f, 0.0f, -30.0f));
+                }
+            }
+
+            ++StepCount;
+        }
+    }
+
+    MinBounds = MinDebugBounds - FVector(100.0f, 100.0f, 0.0f);
+    MaxBounds = MaxDebugBounds + FVector(100.0f, 100.0f, 0.0f);
+
+    if (CurrentCollisionBox)
+    {
+        GetWorld()->GetTimerManager().SetTimerForNextTick([this]() {
+            if (CurrentCollisionBox)
+            {
+                CurrentCollisionBox->SetHiddenInGame(false);
+                CurrentCollisionBox->SetVisibility(true);
+                bIsBoxRedy = true;
+            }
+        });
+    }
 }
-
-
 //--
 
 /*void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
