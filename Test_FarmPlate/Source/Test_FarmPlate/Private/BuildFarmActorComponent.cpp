@@ -140,6 +140,7 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
     // Используем внутренние координаты
      MinBounds = InternalBoundsMin;
      MaxBounds = InternalBoundsMax;
+     
      //-------------------------------------------
      //новая строка Используем расширения границ
       float PaddingX_Min = StepX /  -1.35f; // Уменьшаем левую границу (например, -25.0f)
@@ -148,8 +149,11 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
       float PaddingY_Max =  StepY / 0.99f; // Увеличиваем верхнюю границу (например, +30.0f)
 
   
-    FVector AdjustedMinBounds=InternalBoundsMin+FVector(21.0f,30.0f,0.0f);
-     FVector AdjustedMaxBounds=InternalBoundsMax-FVector(-25.0f,-40.0f,0.0f);
+   // FVector AdjustedMinBounds=InternalBoundsMin+FVector(21.0f,30.0f,0.0f);
+   // FVector AdjustedMaxBounds=InternalBoundsMax-FVector(-25.0f,-40.0f,0.0f);
+
+    FVector AdjustedMinBounds = InternalBoundsMin - FVector(PaddingX_Min, PaddingY_Min, 0.0f); 
+    FVector AdjustedMaxBounds = InternalBoundsMax + FVector(PaddingX_Max, PaddingY_Max, 0.0f);
     
      //  Дополнительная коррекция для нижнего правого угла
     UE_LOG(LogTemp, Warning, TEXT("Before Adjust: AdjustedMaxBounds.X=%f, AdjustedMinBounds.Y=%f"), AdjustedMaxBounds.X, AdjustedMinBounds.Y);
