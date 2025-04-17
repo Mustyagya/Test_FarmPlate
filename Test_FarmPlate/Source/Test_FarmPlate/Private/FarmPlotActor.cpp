@@ -58,13 +58,6 @@ void AFarmPlotActor::InitializePlot(FVector PlotLocation, FVector PlotSIze ,FVec
 	UpdateMeshLocation();
 }
 
-void AFarmPlotActor::SetHighlight(bool bHighlight)
-{
-	if (!PlotMesh || !NormalMaterial || !HighlightMaterial) return;
-
-	UMaterialInterface* NewMaterial = bHighlight ? HighlightMaterial : NormalMaterial;
-	PlotMesh->SetMaterial(0, NewMaterial);
-}
 
 
 void AFarmPlotActor::UpdateMeshLocation()

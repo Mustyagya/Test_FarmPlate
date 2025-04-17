@@ -84,51 +84,11 @@ void UBuildFarmActorComponent::PerformLineTrace()
     if (bHit)
     {
         DrawDebugLine(GetWorld(), Start, LastHitResult.ImpactPoint, FColor::Green, false, -1, 0, 1.0f);
-            AActor* HitActor=LastHitResult.GetActor();
-        //Подсветка мелкого бокса
-        if (AFarmPlotActor*HitPlot=Cast<AFarmPlotActor>(HitActor))
-        {
-        if (LastHighlightedPlot && LastHighlightedPlot!=HitPlot)
-            LastHighlightedPlot->SetHighlight(false);//сброс прошлого
-
-            HitPlot->SetHighlight(true);
-            LastHighlightedPlot=HitPlot;
-        }
-        else if (LastHighlightedPlot)
-        {
-            LastHighlightedPlot->SetHighlight(false);
-            LastHighlightedPlot=HitPlot;
-        }
-        //Подсветка главного бокса
-        if(LastHitResult.Component==CurrentCollisionBox)
-        {
-            if (!bIsMainBoxHighlighted)
-            {
-                CurrentCollisionBox->SetMaterial(0,HighlightMaterial);
-                bIsMainBoxHighlighted=true;
-            }
-        }
-        else if (bIsMainBoxHighlighted)
-        {
-            CurrentCollisionBox->SetMaterial(0,NormalMaterial);
-            bIsMainBoxHighlighted=false;
-        }
+        
     }
     else
     {
         DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, -1, 0, 1.0f);
-
-        if (LastHighlightedPlot)
-        {
-            LastHighlightedPlot->SetHighlight(false);
-            LastHighlightedPlot=nullptr;
-        }
-        if (bIsMainBoxHighlighted)
-        {
-            CurrentCollisionBox->SetMaterial(0,NormalMaterial);
-            bIsMainBoxHighlighted=false;
-        }
-
     }
 }
 
