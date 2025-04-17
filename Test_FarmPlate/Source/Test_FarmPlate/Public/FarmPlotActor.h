@@ -16,7 +16,7 @@ public:
 	AFarmPlotActor();
 	UFUNCTION(BlueprintCallable, Category = "Plot")
 	void InitializePlot(FVector PlotLocation, FVector PlotSIze,  FVector InMeshOffset);
-	
+	void SetHighlight(bool bHighlight);	
 
 protected:
 	// Called when the game starts or when spawned
@@ -33,6 +33,13 @@ public:
 	class UStaticMeshComponent* PlotMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category="Plot")
 	FVector MeshOffset;
+	//--
+	UPROPERTY(EditAnywhere, Category = "Materials")
+	UMaterialInterface* NormalMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Materials")
+	UMaterialInterface* HighlightMaterial;
+	//--
 private:
 	void UpdateMeshLocation();
 };

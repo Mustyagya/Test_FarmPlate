@@ -84,10 +84,51 @@ void UBuildFarmActorComponent::PerformLineTrace()
     if (bHit)
     {
         DrawDebugLine(GetWorld(), Start, LastHitResult.ImpactPoint, FColor::Green, false, -1, 0, 1.0f);
+            AActor* HitActor=LastHitResult.GetActor();
+        //Подсветка мелкого бокса
+        if (AFarmPlotActor*HitPlot=Cast<AFarmPlotActor>(HitActor))
+        {
+        if (LastHighlightedPlot && LastHighlightedPlot!=HitPlot)
+            LastHighlightedPlot->SetHighlight(false);//сброс прошлого
+
+            HitPlot->SetHighlight(true);
+            LastHighlightedPlot=HitPlot;
+        }
+        else if (LastHighlightedPlot)
+        {
+            LastHighlightedPlot->SetHighlight(false);
+            LastHighlightedPlot=HitPlot;
+        }
+        //Подсветка главного бокса
+        if(LastHitResult.Component==CurrentCollisionBox)
+        {
+            if (!bIsMainBoxHighlighted)
+            {
+                CurrentCollisionBox->SetMaterial(0,HighlightMaterial);
+                bIsMainBoxHighlighted=true;
+            }
+        }
+        else if (bIsMainBoxHighlighted)
+        {
+            CurrentCollisionBox->SetMaterial(0,NormalMaterial);
+            bIsMainBoxHighlighted=false;
+        }
     }
     else
     {
         DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, -1, 0, 1.0f);
+
+        if (LastHighlightedPlot)
+        {
+            LastHighlightedPlot->SetHighlight(false);
+            LastHighlightedPlot=nullptr;
+        }
+        if (bIsMainBoxHighlighted)
+        {
+            CurrentCollisionBox->SetMaterial(0,NormalMaterial);
+            bIsMainBoxHighlighted=false;
+        }
+
     }
 }
 
@@ -129,6 +170,8 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
     if (!bIsPlacing || !CurrentCollisionBox) return;
     bIsPlacing = false;
     Center = CurrentCollisionBox->GetComponentLocation();
+    Center.Z -= 42.0f;
+    UE_LOG(LogTemp,Warning,TEXT("position BIG Box "))
     FVector HalfSize = CurrentCollisionBox->GetScaledBoxExtent();
     MinBounds = Center - HalfSize;
     MaxBounds = Center + HalfSize;
@@ -378,7 +421,7 @@ UE_LOG(LogTemp, Warning, TEXT("Before UpdateFarmPlotSize: InternalBoundsMin: %s,
         // Обновление размеров главного бокса
             CurrentCollisionBox->SetBoxExtent(CurrentSize / 2.0f);
             Center = (InitialLocation + NewLocation) / 2.0f;
-            Center.Z += 65.0f;
+                Center.Z += 77.0f;
             CurrentCollisionBox->SetWorldLocation(Center);
             // Корректный расчет границ
             FVector HalfSize = CurrentSize / 2.0f;

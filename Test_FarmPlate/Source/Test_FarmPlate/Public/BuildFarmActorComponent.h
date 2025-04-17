@@ -51,9 +51,16 @@ public:
 	float MainBoxWidth;
 	float MainBoxHeight;
 	bool bIsBoxRedy;
-	
-	
-
+	//--
+	//изменение цвета мелких боксов
+	// Последний подсвеченный мелкий бокс
+	AFarmPlotActor* LastHighlightedPlot = nullptr;
+	// Флаг: подсвечен ли главный бокс
+	bool bIsMainBoxHighlighted = false;
+	// Материалы
+	UMaterialInterface* HighlightMaterial = nullptr;
+	UMaterialInterface* NormalMaterial = nullptr;
+	//--
 private:
 	bool bIsPlacing;  // Флаг, определяющий процесс установки бокса
 	FVector InitialLocation;  // Стартовая позиция бокса
@@ -64,5 +71,7 @@ private:
 	FVector PreviousSize;//хранит предедущие координаты бокса
 
 	FVector LastKnowSize;
+
+	
 	
 };

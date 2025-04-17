@@ -22,6 +22,8 @@
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\boxcomponent.generated.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\source\\test_farmplate\\public\\farmplotactor.h",
+            "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\unrealeditor\\inc\\test_farmplate\\uht\\farmplotactor.generated.h",
             "g:\\ue4\\unrealprojects\\cpptask\\test_farmplate\\test_farmplate\\intermediate\\build\\win64\\unrealeditor\\inc\\test_farmplate\\uht\\buildfarmactorcomponent.generated.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\moviescenetracks\\public\\moviescenetrackscomponenttypes.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\moviescene\\public\\entitysystem\\builtincomponenttypes.h",
@@ -176,7 +178,9 @@
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\fastreferencecollector.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\garbagecollectionschema.h",
             "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\versetypesfwd.h",
-            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\dynamicallytypedvalue.h"
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\dynamicallytypedvalue.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\staticmeshdescription\\public\\staticmeshattributes.h",
+            "g:\\ue4\\unreal\\ue_5.4\\engine\\source\\runtime\\meshdescription\\public\\meshattributes.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
