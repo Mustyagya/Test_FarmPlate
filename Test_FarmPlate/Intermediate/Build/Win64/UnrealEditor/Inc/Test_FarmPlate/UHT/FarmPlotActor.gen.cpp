@@ -93,6 +93,17 @@ struct Z_Construct_UClass_AFarmPlotActor_Statics
 		{ "IncludePath", "FarmPlotActor.h" },
 		{ "ModuleRelativePath", "Public/FarmPlotActor.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SelecticMeshComponent_MetaData[] = {
+		{ "Category", "Plot" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//--\xd1\x8d\xd1\x82\xd0\xbe \xd0\xba\xd0\xb0\xd0\xba \xd0\xb4\xd0\xbe\xd0\xbf \xd0\xbc\xd0\xb5\xd1\x88 \xd0\xb4\xd0\xbb\xd1\x8f \xd0\xb2\xd1\x8b\xd0\xb4\xd0\xb5\xd0\xbb\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f \xd0\xbc\xd0\xb5\xd0\xbb\xd0\xba\xd0\xb8\xd1\x85 \xd0\xb1\xd0\xbe\xd0\xba\xd1\x81\xd0\xbe\xd0\xb2\n" },
+#endif
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/FarmPlotActor.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "--\xd1\x8d\xd1\x82\xd0\xbe \xd0\xba\xd0\xb0\xd0\xba \xd0\xb4\xd0\xbe\xd0\xbf \xd0\xbc\xd0\xb5\xd1\x88 \xd0\xb4\xd0\xbb\xd1\x8f \xd0\xb2\xd1\x8b\xd0\xb4\xd0\xb5\xd0\xbb\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f \xd0\xbc\xd0\xb5\xd0\xbb\xd0\xba\xd0\xb8\xd1\x85 \xd0\xb1\xd0\xbe\xd0\xba\xd1\x81\xd0\xbe\xd0\xb2" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CollisionBox_MetaData[] = {
 		{ "Category", "Plot" },
 		{ "EditInline", "true" },
@@ -108,6 +119,7 @@ struct Z_Construct_UClass_AFarmPlotActor_Statics
 		{ "ModuleRelativePath", "Public/FarmPlotActor.h" },
 	};
 #endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_SelecticMeshComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CollisionBox;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PlotMesh;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_MeshOffset;
@@ -122,10 +134,12 @@ struct Z_Construct_UClass_AFarmPlotActor_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_SelecticMeshComponent = { "SelecticMeshComponent", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFarmPlotActor, SelecticMeshComponent), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SelecticMeshComponent_MetaData), NewProp_SelecticMeshComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_CollisionBox = { "CollisionBox", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFarmPlotActor, CollisionBox), Z_Construct_UClass_UBoxComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CollisionBox_MetaData), NewProp_CollisionBox_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_PlotMesh = { "PlotMesh", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFarmPlotActor, PlotMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlotMesh_MetaData), NewProp_PlotMesh_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_MeshOffset = { "MeshOffset", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFarmPlotActor, MeshOffset), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MeshOffset_MetaData), NewProp_MeshOffset_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFarmPlotActor_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_SelecticMeshComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_CollisionBox,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_PlotMesh,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFarmPlotActor_Statics::NewProp_MeshOffset,
@@ -171,10 +185,10 @@ AFarmPlotActor::~AFarmPlotActor() {}
 struct Z_CompiledInDeferFile_FID_UnrealProjects_CppTask_Test_FarmPlate_Test_FarmPlate_Source_Test_FarmPlate_Public_FarmPlotActor_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFarmPlotActor, AFarmPlotActor::StaticClass, TEXT("AFarmPlotActor"), &Z_Registration_Info_UClass_AFarmPlotActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFarmPlotActor), 1695468541U) },
+		{ Z_Construct_UClass_AFarmPlotActor, AFarmPlotActor::StaticClass, TEXT("AFarmPlotActor"), &Z_Registration_Info_UClass_AFarmPlotActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFarmPlotActor), 4082056108U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UnrealProjects_CppTask_Test_FarmPlate_Test_FarmPlate_Source_Test_FarmPlate_Public_FarmPlotActor_h_30483561(TEXT("/Script/Test_FarmPlate"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UnrealProjects_CppTask_Test_FarmPlate_Test_FarmPlate_Source_Test_FarmPlate_Public_FarmPlotActor_h_2801686144(TEXT("/Script/Test_FarmPlate"),
 	Z_CompiledInDeferFile_FID_UnrealProjects_CppTask_Test_FarmPlate_Test_FarmPlate_Source_Test_FarmPlate_Public_FarmPlotActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_UnrealProjects_CppTask_Test_FarmPlate_Test_FarmPlate_Source_Test_FarmPlate_Public_FarmPlotActor_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

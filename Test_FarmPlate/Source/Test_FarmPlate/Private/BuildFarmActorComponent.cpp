@@ -133,6 +133,7 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
     Center.Z -= 42.0f;
     UE_LOG(LogTemp,Warning,TEXT("position BIG Box "))
     FVector HalfSize = CurrentCollisionBox->GetScaledBoxExtent();
+    
     MinBounds = Center - HalfSize;
     MaxBounds = Center + HalfSize;
    // FVector Offset(5.0f, 5.0f, 0.0f);
@@ -258,6 +259,17 @@ void UBuildFarmActorComponent::OnFinishPlacingFarmPlot()
                 CurrentCollisionBox->SetVisibility(true);
                 bIsBoxRedy=true;
                 
+            }
+            if (!MainHighlightMesh && HighlightMeshTemplate)
+            {
+                MainHighlightMesh = NewObject<UStaticMeshComponent>(GetOwner());
+                MainHighlightMesh->RegisterComponent();
+                MainHighlightMesh->AttachToComponent(CurrentCollisionBox, FAttachmentTransformRules::KeepRelativeTransform);
+                MainHighlightMesh->SetStaticMesh(HighlightMeshTemplate);
+                MainHighlightMesh->SetMaterial(0, HighlightMaterial);
+                MainHighlightMesh->SetWorldScale3D(CurrentCollisionBox->GetComponentScale());
+                MainHighlightMesh->SetVisibility(false);
+                MainHighlightMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
             }
         });
     }

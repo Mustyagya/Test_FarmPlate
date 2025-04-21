@@ -51,9 +51,17 @@ public:
 	float MainBoxWidth;
 	float MainBoxHeight;
 	bool bIsBoxRedy;
-	
-	
-
+	//--
+	// Компонент подсветки главного бокса
+	UPROPERTY()
+	UStaticMeshComponent* MainHighlightMesh;
+	// Шаблон меша для подсветки
+	UPROPERTY(EditDefaultsOnly, Category="Highlight")
+	UStaticMesh* HighlightMeshTemplate;
+	// Материал для подсветки
+	UPROPERTY(EditDefaultsOnly, Category="Highlight")
+	UMaterialInterface* HighlightMaterial;
+	//--
 private:
 	bool bIsPlacing;  // Флаг, определяющий процесс установки бокса
 	FVector InitialLocation;  // Стартовая позиция бокса

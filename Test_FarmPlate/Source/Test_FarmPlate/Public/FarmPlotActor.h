@@ -25,7 +25,9 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+	//--это как доп меш для выделения мелких боксов
+	UPROPERTY( VisibleAnywhere, BlueprintReadWrite, Category = "Plot")
+	class UStaticMeshComponent* SelecticMeshComponent;
 	
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite,Category="Plot")
 	class UBoxComponent* CollisionBox;
